@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Brewed Coffee | Craft Coffee & Bakery</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <header class="site-header" id="top">
+      <div class="container nav">
+        <a href="#top" class="brand">
+          <i class="fa-solid fa-mug-saucer"></i>
+          <span>TARITECH</span>
+        </a>
+        <nav class="primary-nav" aria-label="Main">
+          <a href="#home">Home</a>
+          <a href="#menu">Menu</a>
+          <a href="#about">About</a>
+          <a href="#testimonials">Testimonials</a>
+          <a href="#contact">Contact</a>
+        </nav>
+        <a href="#menu" class="btn order">Order Now</a>
+        <button class="cart-btn" aria-label="Open cart">
+          <i class="fa-solid fa-bag-shopping"></i>
+          <span class="badge" id="cart-count">0</span>
+        </button>
+        <button class="nav-toggle" aria-label="Toggle menu">
+          <i class="fa-solid fa-bars"></i>
+        </button>
+      </div>
+    </header>
+
+    <main>
+      <section id="home" class="hero">
+        <div class="container hero-grid">
+          <div class="hero-copy">
+            <h1>Craft coffee, roasted daily</h1>
+            <p>Small-batch beans, artisanal brewing, and fresh bakes. Start your day with flavor that inspires.</p>
+            <div class="hero-cta">
+              <a href="#menu" class="btn primary"><i class="fa-solid fa-mug-hot"></i><span>Explore Menu</span></a>
+              <a href="#about" class="btn ghost"><i class="fa-regular fa-circle-play"></i><span>Our Story</span></a>
+            </div>
+            <div class="hero-stats">
+              <div><strong>50k+</strong><span>Happy Customers</span></div>
+              <div><strong>200+</strong><span>Daily Brews</span></div>
+              <div><strong>4.9★</strong><span>Average Rating</span></div>
+            </div>
+          </div>
+          <div class="hero-media reveal">
+            <div class="hero-image" role="img" aria-label="Latte art in a ceramic cup"></div>
+          </div>
+        </div>
+      </section>
+
+      <section id="menu" class="section menu">
+        <div class="container">
+          <div class="section-head">
+            <h2>Menu Favorites</h2>
+            <p>Signature drinks and bakes crafted with seasonal ingredients.</p>
+          </div>
+          <div class="cards">
+            <article class="card">
+              <div class="card-media reveal" style="background-image:url('https://images.unsplash.com/photo-1504754524776-8f4f37790ca0?q=80&w=1200&auto=format&fit=crop');"></div>
+              <div class="card-body">
+                <h3>Flat White</h3>
+                <p>Velvety microfoam with rich espresso.</p>
+                <div class="price">$4.50</div>
+                <button class="btn small add"><i class="fa-solid fa-plus"></i><span>Add</span></button>
+              </div>
+            </article>
+            <article class="card">
+              <div class="card-media reveal" style="background-image:url('https://images.unsplash.com/photo-1529070538774-1843cb3265df?q=80&w=1200&auto=format&fit=crop');"></div>
+              <div class="card-body">
+                <h3>Caramel Latte</h3>
+                <p>House-made caramel and steamed milk.</p>
+                <div class="price">$5.20</div>
+                <button class="btn small add"><i class="fa-solid fa-plus"></i><span>Add</span></button>
+              </div>
+            </article>
+            <article class="card">
+              <div class="card-media reveal" style="background-image:url('https://images.unsplash.com/photo-1511920170033-f8396924c348?q=80&w=1200&auto=format&fit=crop');"></div>
+              <div class="card-body">
+                <h3>Mocha</h3>
+                <p>Dark chocolate with double shot espresso.</p>
+                <div class="price">$5.00</div>
+                <button class="btn small add"><i class="fa-solid fa-plus"></i><span>Add</span></button>
+              </div>
+            </article>
+            <article class="card">
+              <div class="card-media reveal" style="background-image:url('https://images.unsplash.com/photo-1541167760496-1628856ab772?q=80&w=1200&auto=format&fit=crop');"></div>
+              <div class="card-body">
+                <h3>Blueberry Muffin</h3>
+                <p>Buttery crumb with fresh blueberries.</p>
+                <div class="price">$3.50</div>
+                <button class="btn small add"><i class="fa-solid fa-plus"></i><span>Add</span></button>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section id="about" class="section about">
+        <div class="container about-grid">
+          <div class="about-media reveal"></div>
+          <div class="about-copy">
+            <h2>Roasted with purpose</h2>
+            <p>We source ethically, roast locally, and brew with intention. Our team believes great coffee starts at the farm and finishes in your cup with care.</p>
+            <ul class="ticks">
+              <li><i class="fa-solid fa-check"></i><span>Single-origin and seasonal blends</span></li>
+              <li><i class="fa-solid fa-check"></i><span>Farm-to-cup transparency</span></li>
+              <li><i class="fa-solid fa-check"></i><span>Vegan and gluten-free bakes</span></li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section id="testimonials" class="section testimonials">
+        <div class="container">
+          <div class="section-head">
+            <h2>What people say</h2>
+            <p>Real sips. Real stories.</p>
+          </div>
+          <div class="slider">
+            <button class="slider-btn prev" aria-label="Previous"><i class="fa-solid fa-chevron-left"></i></button>
+            <div class="slides">
+              <figure class="slide active">
+                <blockquote>Best coffee in town. The flat white is perfection and the staff are always friendly.</blockquote>
+                <figcaption>
+                  <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=400&auto=format&fit=crop" alt="Customer" />
+                  <div><strong>Alex Morgan</strong><span>Designer</span></div>
+                </figcaption>
+              </figure>
+              <figure class="slide">
+                <blockquote>The pastries are unreal. Try the blueberry muffin with a caramel latte.</blockquote>
+                <figcaption>
+                  <img src="https://images.unsplash.com/photo-1527980965255-d3b416303d12?q=80&w=400&auto=format&fit=crop" alt="Customer" />
+                  <div><strong>Sara Khan</strong><span>Photographer</span></div>
+                </figcaption>
+              </figure>
+              <figure class="slide">
+                <blockquote>Love the vibe and the commitment to ethical sourcing. Five stars.</blockquote>
+                <figcaption>
+                  <img src="https://images.unsplash.com/photo-1547425260-76bcadfb4f2c?q=80&w=400&auto=format&fit=crop" alt="Customer" />
+                  <div><strong>Diego Flores</strong><span>Developer</span></div>
+                </figcaption>
+              </figure>
+            </div>
+            <button class="slider-btn next" aria-label="Next"><i class="fa-solid fa-chevron-right"></i></button>
+          </div>
+          <div class="dots" aria-label="Slide indicators"></div>
+        </div>
+      </section>
+
+      <section id="contact" class="section contact">
+        <div class="container contact-grid">
+          <div class="contact-copy">
+            <h2>Get in touch</h2>
+            <p>Questions, catering, or collaborations. We’d love to hear from you.</p>
+            <ul class="contact-list">
+              <li><i class="fa-solid fa-location-dot"></i><span>123 Roast Ave, Bean City</span></li>
+              <li><i class="fa-solid fa-phone"></i><span>+1 (555) 123-9876</span></li>
+              <li><i class="fa-solid fa-envelope"></i><span>hello@brewed.coffee</span></li>
+            </ul>
+          </div>
+          <form class="contact-form" novalidate>
+            <div class="field">
+              <label for="name">Name</label>
+              <input type="text" id="name" name="name" placeholder="Your name" required />
+              <p class="error" data-for="name"></p>
+            </div>
+            <div class="field">
+              <label for="email">Email</label>
+              <input type="email" id="email" name="email" placeholder="you@example.com" required />
+              <p class="error" data-for="email"></p>
+            </div>
+            <div class="field">
+              <label for="message">Message</label>
+              <textarea id="message" name="message" rows="4" placeholder="How can we help?" required></textarea>
+              <p class="error" data-for="message"></p>
+            </div>
+            <button type="submit" class="btn primary"><i class="fa-regular fa-paper-plane"></i><span>Send Message</span></button>
+          </form>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container footer-grid">
+        <div class="foot-brand">
+          <a href="#top" class="brand"><i class="fa-solid fa-mug-saucer"></i><span>TARITECH</span></a>
+          <p>Craft coffee. Local community. Better mornings.</p>
+        </div>
+        <div>
+          <h4>Explore</h4>
+          <ul>
+            <li><a href="#menu">Menu</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#testimonials">Reviews</a></li>
+            <li><a href="#contact">Contact</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Follow</h4>
+          <div class="socials">
+            <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+            <a href="#" aria-label="Twitter"><i class="fa-brands fa-x-twitter"></i></a>
+            <a href="#" aria-label="Facebook"><i class="fa-brands fa-facebook"></i></a>
+          </div>
+        </div>
+      </div>
+      <div class="container foot-bottom">
+        <span> &copy; <span id="year"></span> Brewed Coffee</span>
+        <a href="#top" class="to-top"><i class="fa-solid fa-arrow-up"></i></a>
+      </div>
+    </footer>
+
+    <!-- Cart Drawer -->
+    <div class="cart-overlay" aria-hidden="true"></div>
+    <aside class="cart-panel" aria-label="Shopping cart" aria-hidden="true">
+      <div class="cart-header">
+        <h3><i class="fa-solid fa-bag-shopping"></i> Your Cart</h3>
+        <button class="cart-close" aria-label="Close cart"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+      <div class="cart-items"></div>
+      <div class="cart-footer">
+        <div class="cart-total"><span>Total</span><strong id="cart-total">$0.00</strong></div>
+        <div class="cart-actions">
+          <button class="btn ghost cart-clear"><i class="fa-solid fa-trash"></i><span>Clear</span></button>
+          <button class="btn primary cart-checkout"><i class="fa-solid fa-credit-card"></i><span>Checkout</span></button>
+        </div>
+      </div>
+    </aside>
+
+    <script src="./main.js"></script>
+  </body>
+</html>

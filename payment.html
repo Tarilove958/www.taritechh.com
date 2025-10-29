@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TARITECH | Checkout</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="./style.css" />
+    <style>
+      .checkout { padding: 32px 0; }
+      .checkout-grid { display: grid; grid-template-columns: 1.2fr .8fr; gap: 18px; }
+      .panel { background: linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,0)) padding-box, linear-gradient(180deg, rgba(255,255,255,.12), rgba(255,255,255,.04)) border-box, var(--card); border: 1px solid transparent; border-radius: 16px; box-shadow: var(--shadow); }
+      .panel h2 { padding: 16px; border-bottom: 1px solid rgba(255,255,255,.1); }
+      .panel-body { padding: 16px; }
+      .summary-items { display: grid; gap: 10px; }
+      .summary-item { display: grid; grid-template-columns: 64px 1fr auto; gap: 10px; align-items: center; border: 1px solid rgba(255,255,255,.1); border-radius: 12px; padding: 8px; }
+      .summary-thumb { width: 64px; height: 64px; border-radius: 10px; background-size: cover; background-position: center; border: 1px solid rgba(255,255,255,.12); }
+      .summary-name { font-weight: 700; }
+      .summary-meta { color: var(--muted); font-size: 13px; }
+      .summary-total { display: flex; align-items: center; justify-content: space-between; padding-top: 12px; border-top: 1px solid rgba(255,255,255,.1); margin-top: 12px; }
+      .pay-form .field { margin-bottom: 10px; }
+      .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+      .notice { color: var(--muted); font-size: 12px; margin-top: 8px; }
+      .success { display: none; margin-top: 12px; padding: 10px; border: 1px solid rgba(34,197,94,.35); color: #22c55e; border-radius: 10px; }
+      .success.show { display: block; }
+      .crumbs { padding: 12px 0; color: var(--muted); }
+      .crumbs a { color: var(--text); text-decoration: underline; }
+      @media (max-width: 980px){ .checkout-grid { grid-template-columns: 1fr; } }
+    </style>
+  </head>
+  <body>
+    <header class="site-header" id="top">
+      <div class="container nav">
+        <a href="./index.html#top" class="brand"><i class="fa-solid fa-mug-saucer"></i><span>TARITECH</span></a>
+        <nav class="primary-nav" aria-label="Main"></nav>
+        <a href="./index.html#menu" class="btn order">Back to Menu</a>
+      </div>
+    </header>
+
+    <main class="checkout">
+      <div class="container">
+        <div class="crumbs"><a href="./index.html">Home</a> / Checkout</div>
+        <div class="checkout-grid">
+          <section class="panel">
+            <h2>Order Summary</h2>
+            <div class="panel-body">
+              <div class="summary-items" id="summary-items"></div>
+              <div class="summary-total">
+                <span>Total</span>
+                <strong id="summary-total">$0.00</strong>
+              </div>
+            </div>
+          </section>
+          <section class="panel">
+            <h2>Payment Details</h2>
+            <div class="panel-body">
+              <form class="pay-form" id="pay-form" novalidate>
+                <div class="field">
+                  <label for="cardName">Name on card</label>
+                  <input type="text" id="cardName" placeholder="Full name" required />
+                  <p class="error" data-for="cardName"></p>
+                </div>
+                <div class="field">
+                  <label for="cardNumber">Card number</label>
+                  <input type="text" id="cardNumber" inputmode="numeric" autocomplete="cc-number" placeholder="1234 5678 9012 3456" required />
+                  <p class="error" data-for="cardNumber"></p>
+                </div>
+                <div class="grid-2">
+                  <div class="field">
+                    <label for="cardExpiry">Expiry (MM/YY)</label>
+                    <input type="text" id="cardExpiry" inputmode="numeric" autocomplete="cc-exp" placeholder="MM/YY" required />
+                    <p class="error" data-for="cardExpiry"></p>
+                  </div>
+                  <div class="field">
+                    <label for="cardCvv">CVV</label>
+                    <input type="password" id="cardCvv" inputmode="numeric" autocomplete="cc-csc" placeholder="123" required />
+                    <p class="error" data-for="cardCvv"></p>
+                  </div>
+                </div>
+                <button type="submit" class="btn primary" id="pay-btn"><i class="fa-solid fa-lock"></i><span>Pay Now</span></button>
+                <p class="notice"><i class="fa-solid fa-shield-halved"></i> Payments are securely processed. This is a demo; no real charge will be made.</p>
+                <div class="success" id="success-msg"><i class="fa-solid fa-circle-check"></i> Payment successful! Thank you for your order.</div>
+              </form>
+            </div>
+          </section>
+        </div>
+      </div>
+    </main>
+
+    <script>
+      function fmt(n){ return `$${n.toFixed(2)}`; }
+      function setErr(id,msg){ const el=document.querySelector(`.error[data-for="${id}"]`); if(el) el.textContent=msg||''; }
+      function luhn(num){
+        const s=num.replace(/\s+/g,'');
+        if(!/^[0-9]{12,19}$/.test(s)) return false;
+        let sum=0, alt=false;
+        for(let i=s.length-1;i>=0;i--){
+          let n=parseInt(s[i],10);
+          if(alt){ n*=2; if(n>9) n-=9; }
+          sum+=n; alt=!alt;
+        }
+        return sum%10===0;
+      }
+      function validExpiry(v){
+        const m=v.match(/^(0[1-9]|1[0-2])\/(\d{2})$/); if(!m) return false;
+        const mm=parseInt(m[1],10), yy=parseInt(m[2],10);
+        const now=new Date();
+        const y=now.getFullYear()%100, mth=now.getMonth()+1;
+        return yy>y || (yy===y && mm>=mth);
+      }
+      function validCvv(v){ return /^\d{3,4}$/.test(v); }
+
+      const itemsWrap=document.getElementById('summary-items');
+      const totalEl=document.getElementById('summary-total');
+      let cart={};
+      try{ cart=JSON.parse(localStorage.getItem('cart')||'{}')||{}; }catch{ cart={}; }
+      const items=Object.values(cart);
+      if(!items.length){
+        itemsWrap.innerHTML='<p>Your cart is empty. <a class="link" href="./index.html#menu">Browse menu</a>.</p>';
+      } else {
+        items.forEach(it=>{
+          const row=document.createElement('div');
+          row.className='summary-item';
+          row.innerHTML=`
+            <div class="summary-thumb" style="background-image:url('${it.image||''}')"></div>
+            <div>
+              <div class="summary-name">${it.name}</div>
+              <div class="summary-meta">Qty ${it.qty} • ${fmt(it.price)}</div>
+            </div>
+            <div><strong>${fmt(it.qty*it.price)}</strong></div>
+          `;
+          itemsWrap.appendChild(row);
+        });
+      }
+      const total=items.reduce((s,it)=>s+it.qty*it.price,0);
+      totalEl.textContent=fmt(total);
+
+      const form=document.getElementById('pay-form');
+      form?.addEventListener('submit', (e)=>{
+        e.preventDefault();
+        const name=document.getElementById('cardName');
+        const number=document.getElementById('cardNumber');
+        const expiry=document.getElementById('cardExpiry');
+        const cvv=document.getElementById('cardCvv');
+        let ok=true;
+        if(!name.value.trim()){ setErr('cardName','Enter name on card'); ok=false; } else setErr('cardName');
+        const digits=number.value.replace(/[^0-9]/g,'');
+        if(!luhn(digits)){ setErr('cardNumber','Enter a valid card number'); ok=false; } else setErr('cardNumber');
+        if(!validExpiry(expiry.value.trim())){ setErr('cardExpiry','Invalid expiry (MM/YY)'); ok=false; } else setErr('cardExpiry');
+        if(!validCvv(cvv.value.trim())){ setErr('cardCvv','Invalid CVV'); ok=false; } else setErr('cardCvv');
+        if(!items.length){ alert('Your cart is empty.'); return; }
+        if(!ok) return;
+        const btn=document.getElementById('pay-btn');
+        btn.disabled=true; btn.innerHTML='<i class="fa-solid fa-spinner fa-spin"></i><span>Processing...</span>';
+        setTimeout(()=>{
+          localStorage.removeItem('cart');
+          const msg=document.getElementById('success-msg');
+          msg.classList.add('show');
+          btn.disabled=false; btn.innerHTML='<i class="fa-solid fa-check"></i><span>Paid</span>';
+          setTimeout(()=>{ window.location.href='./index.html#home'; }, 1800);
+        }, 1200);
+      });
+    </script>
+  </body>
+</html>
